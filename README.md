@@ -4,7 +4,7 @@ Voor een eindopdracht in het 1e jaar heb ik een design gemaakt voor een app van 
 
 1. Ik zou dit project willen maken omdat ik toen en nu nog altijd zeer tevreden ben van dit ontwerp dat ik toen gemaakt had, waardoor dit mij de perfecte app leek voor dit eindproject.
 
-2.
+2. Voor de technische uitwerking zal ik beginnen met zelf een api te maken waar ik alle data kan gaan opslaan en wegschrijven. In de app zelf zal ik sharing, mails sturen en location proberen te verwerken. En voor de navigatie gebruik ik een tab navigation. Ook zal ik gebruik maken van verschillende gestures zoals voor het horizontaal scrollen tussen de verschillende populaire honden.
 
 3. Voor de UI gebruik ik een eigen gemaakt design. 
 <p float="left">

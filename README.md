@@ -7,7 +7,7 @@ Voor een eindopdracht in het 1e jaar heb ik een design gemaakt voor een app van 
 2.
 
 3. Voor de UI gebruik ik een eigen gemaakt design. 
-![image](https://user-images.githubusercontent.com/71887067/157192025-c075ec39-1901-4d57-a4f9-0bb511b8fad2.png | width=100)
+<img src="https://user-images.githubusercontent.com/71887067/157192025-c075ec39-1901-4d57-a4f9-0bb511b8fad2.png" width="100" height="100">
 ![image](https://user-images.githubusercontent.com/71887067/157192103-4d8faa8b-b847-4657-9d19-217175a262eb.png)
 ![image](https://user-images.githubusercontent.com/71887067/157192402-74ae8902-abd5-4f79-a5d8-615d591dd210.png)
 

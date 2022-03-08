@@ -13,4 +13,6 @@ Voor een eindopdracht in het 1e jaar heb ik een design gemaakt voor een app van 
   <img src="https://user-images.githubusercontent.com/71887067/157192402-74ae8902-abd5-4f79-a5d8-615d591dd210.png" width="200">
 </p>
 
+  https://dribbble.com/shots/15488152-Citymapper-Public-Transport-App-UI -> Een voorbeeld van hoe ik de kaart zou uitwerken voor de shelters dichtbij en ook voor de route naar de shelter van de hond die je wil bezoeken.
+
 4. Voor het platform zal ik me voornamelijk focussen op Android en eventueel bij tijd over zal ik ook naar ios kijken.

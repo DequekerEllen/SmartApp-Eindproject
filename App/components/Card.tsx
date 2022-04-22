@@ -3,6 +3,7 @@ import Dog from '../interfaces/Dog';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default ({ dog, navigation }: { dog: Dog; navigation: any }) => {
+	
 	return (
 		<TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Detail', { payload: dog })}>
 			<ImageBackground source={{ uri: dog.profilePic }} resizeMode="cover" style={styles.image}>

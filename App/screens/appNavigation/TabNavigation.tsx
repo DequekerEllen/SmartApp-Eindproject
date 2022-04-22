@@ -6,6 +6,7 @@ import Favorites from '../Favorites';
 import Nearby from '../Nearby';
 import Home from '../home/Home';
 import Detail from '../home/Detail';
+import HomeIndex from '../home';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,9 +27,10 @@ export default () => {
 		<Tab.Navigator screenOptions={screenOptions}>
 			<Tab.Screen
 				name="Explore"
-				component={Detail}
+				component={HomeIndex}
 				options={({ navigation }) => ({
 					tabBarLabel: 'Home',
+					headerShown: false,
 				})}
 			/>
 			<Tab.Screen name="Favorites" component={Favorites} />

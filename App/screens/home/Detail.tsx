@@ -2,33 +2,37 @@ import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import Dog from '../../interfaces/Dog';
 
-export default (/*{ route, navigation }: { route: any; navigation: any }*/) => {
-	// const { payload } = route.params;
+export default ({ route }: { route: any }) => {
+	const { payload } = route.params;
+	const dog: Dog = payload;
+
 	const nav = useNavigation();
 	const isFocused = useIsFocused();
 
 	useEffect(() => {
 		nav?.getParent()?.setOptions({ title: 'Detail' });
 	}, [isFocused]);
+	
 	return (
 		<View style={styles.container}>
-			<ImageBackground style={styles.image} resizeMode="cover" source={{ uri: 'https://images.unsplash.com/photo-1588943211346-0908a1fb0b01?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80' }}>
+			<ImageBackground style={styles.image} resizeMode="cover" source={{ uri: dog.profilePic }}>
 				<View style={styles.imageText}>
-					<Text>{'dog.firstName'}</Text>
-					<Text>{'dog.info'}</Text>
+					<Text style={styles.text}>{dog.firstName}</Text>
+					<Text style={styles.text}>{'dog.info'}</Text>
 				</View>
 			</ImageBackground>
 			<View style={styles.actionsContainer}>
-				<View>
+				<View style={styles.actionGroup}>
 					<Ionicons name="share-social" size={30} />
 					<Text>Share</Text>
 				</View>
-				<View>
+				<View style={styles.actionGroup}>
 					<Ionicons name="today" size={30} />
 					<Text>Schedule visit</Text>
 				</View>
-				<View>
+				<View style={styles.actionGroup}>
 					<Ionicons name="navigate-circle" size={30} />
 					<Text>Directions</Text>
 				</View>
@@ -54,7 +58,7 @@ const styles = StyleSheet.create({
 	actionsContainer: {
 		display: 'flex',
 		flexDirection: 'row',
-		justifyContent: 'space-around',
+		justifyContent: 'space-evenly',
 		alignItems: 'center',
 		height: 100,
 		backgroundColor: 'white',
@@ -63,5 +67,13 @@ const styles = StyleSheet.create({
 		// shadowOpacity: 70,
 		borderRadius: 50,
 		marginTop: -50,
+	},
+	actionGroup: {
+		alignItems: 'center',
+	},
+	text: {
+		color: 'white',
+		fontSize: 16,
+		lineHeight: 16,
 	},
 });

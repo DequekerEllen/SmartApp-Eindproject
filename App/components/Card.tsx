@@ -1,19 +1,37 @@
 import { ImageBackground, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Dog from '../interfaces/Dog';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { GestureResponderEvent } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+
+const heartPressOptions = (dog: Dog) => {
+	if (dog.isFavorite == true) {
+		dog.isFavorite = false;
+	} else {
+		dog.isFavorite = true;
+	}
+
+	return dog;
+};
 
 export default ({ dog, navigation }: { dog: Dog; navigation: any }) => {
-	
 	return (
 		<TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Detail', { payload: dog })}>
 			<ImageBackground source={{ uri: dog.profilePic }} resizeMode="cover" style={styles.image}>
-				<Pressable style={styles.heartContainer}>
-					<Ionicons style={styles.heart} color={'red'} name={dog.isFavorite == true ? 'heart' : 'heart-outline'} size={32} />
-				</Pressable>
-				<View style={styles.imageText}>
+				<View style={styles.heartContainer}>
+					<Pressable
+						onPress={() => {
+							heartPressOptions(dog);
+							return dog;
+						}}
+					>
+						<Ionicons style={styles.heart} color={'red'} name={dog.isFavorite == true ? 'heart' : 'heart-outline'} size={32} />
+					</Pressable>
+				</View>
+				<LinearGradient colors={['transparent', '#000000CC']} locations={[0, 0.8]} style={styles.linearGradient}>
 					<Text style={styles.name}>{dog.firstName}</Text>
 					<Text style={styles.info}>{dog.shelter}</Text>
-				</View>
+				</LinearGradient>
 			</ImageBackground>
 		</TouchableOpacity>
 	);
@@ -32,8 +50,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-end',
 	},
 	imageText: {
-		padding: 15,
-		backgroundColor: '#00000073', //Last 2 are opacity value
+		textAlign: 'left',
 	},
 	name: {
 		color: 'white',
@@ -44,11 +61,18 @@ const styles = StyleSheet.create({
 		color: 'white',
 		fontSize: 11,
 	},
+	linearGradient: {
+		justifyContent: 'flex-end',
+		height: 100,
+		paddingLeft: 20,
+		paddingBottom: 15,
+	},
 	heartContainer: {
-		height: 120,
+		flex: 1,
 		alignItems: 'flex-end',
 	},
 	heart: {
-		paddingRight: 20,
+		paddingRight: 10,
+		paddingTop: 10,
 	},
 });

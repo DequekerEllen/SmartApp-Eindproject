@@ -1,6 +1,6 @@
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
-import { FlatList, ScrollView, SectionList, Text, View } from 'react-native';
+import { View, FlatList, StyleSheet, Text, StatusBar, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Card from '../../components/Card';
 import SearchBar from '../../components/SearchBar';

@@ -1,14 +1,15 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Dog from '../interfaces/Dog';
+import Shelter from '../interfaces/Shelter';
 
-export default ({ dog, navigation }: { dog: Dog; navigation: any }) => {
+export default ({ shelter, navigation }: { shelter: Shelter; navigation: any }) => {
 	return (
-		<TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Detail', { payload: dog })}>
-			<ImageBackground source={{ uri: dog.profilePic }} resizeMode="cover" style={styles.image}>
+		<TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Detail', { payload: shelter })}>
+			<ImageBackground source={{ uri: shelter.imgUrl }} resizeMode="cover" style={styles.image}>
 				<LinearGradient colors={['transparent', '#000000CC']} locations={[0, 0.8]} style={styles.linearGradient}>
-					<Text style={styles.name}>{dog.firstName}</Text>
-					<Text style={styles.info}>{dog.shelter}</Text>
+					<Text style={styles.name}>{shelter.name}</Text>
+					<Text style={styles.info}>{shelter.location}</Text>
 				</LinearGradient>
 			</ImageBackground>
 		</TouchableOpacity>

@@ -1,8 +1,12 @@
 export default interface Dog {
-	id: string;
-	firstName: string;
-	profilePic: string;
-	location: string;
-	shelter: string;
+	dogId: string;
+	shelterId: string;
+	name: string;
+	breed: string;
+	gender: string;
+	dateOfBirth: Date;
+	imgUrl: string;
+	videoUrl: string;
+	description: string;
 	isFavorite: boolean;
 }

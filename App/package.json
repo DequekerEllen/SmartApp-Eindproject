@@ -25,7 +25,8 @@
     "react-native-web": "0.17.1",
     "react-native-webview": "11.15.0",
     "react-native-youtube-iframe": "^2.2.2",
-    "expo-linear-gradient": "~11.0.3"
+    "expo-linear-gradient": "~11.0.3",
+    "lottie-react-native": "5.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

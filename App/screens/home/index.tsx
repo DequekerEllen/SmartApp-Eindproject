@@ -27,7 +27,7 @@ export default function HomeIndex() {
 				component={Detail}
 				options={() => ({
 					title: 'Detail',
-					headerShown: false,
+					headerShown: true,
 				})}
 			/>
 		</Stack.Navigator>

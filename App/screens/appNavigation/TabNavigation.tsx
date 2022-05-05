@@ -14,11 +14,14 @@ const screenOptions = ({ route }: { route: RouteProp<ParamListBase> }): BottomTa
 	tabBarIcon: ({ focused, color, size }: { focused: boolean; color: string; size: number }) => {
 		let icon: ComponentProps<typeof Ionicons>['name'] = 'help';
 
-		if (route.name === 'Explore') icon = 'search';
+		if (route.name === 'Explore') icon = 'home';
 		if (route.name === 'Favorites') icon = 'heart';
 		if (route.name === 'Nearby') icon = 'md-compass';
 
 		return <Ionicons color={color} name={icon} size={size} />;
+	},
+	tabBarLabel: () => {
+		return null;
 	},
 });
 
@@ -29,9 +32,9 @@ export default () => {
 				name="Explore"
 				component={HomeIndex}
 				options={({ navigation }) => ({
-					tabBarLabel: 'Home',
 					headerShown: false,
 				})}
+				
 			/>
 			<Tab.Screen name="Favorites" component={Favorites} />
 			<Tab.Screen name="Nearby" component={Nearby} />

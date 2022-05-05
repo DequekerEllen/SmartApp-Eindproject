@@ -1,12 +1,13 @@
 import { useIsFocused, useNavigation } from '@react-navigation/native';
-import { useEffect } from 'react';
-import { ImageBackground, StyleSheet, Text, View, ScrollView, Image, Pressable } from 'react-native';
+import { useEffect, useState } from 'react';
+import { ImageBackground, StyleSheet, Text, View, ScrollView, Pressable, Share } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Dog from '../../interfaces/Dog';
 import YoutubeIframe from 'react-native-youtube-iframe';
 import { LinearGradient } from 'expo-linear-gradient';
+import Shelter from '../../interfaces/Shelter';
 
-export default ({ route }: { route: any }) => {
+export default ({ route, navigation }: { route: any; navigation: any }) => {
 	const { payload } = route.params;
 	const dog: Dog = payload;
 
@@ -14,8 +15,38 @@ export default ({ route }: { route: any }) => {
 	const isFocused = useIsFocused();
 
 	useEffect(() => {
-		nav?.getParent()?.setOptions({ title: 'Detail' });
+		nav.setOptions({ title: dog.name });
 	}, [isFocused]);
+
+	const [isLoading, setLoading] = useState(false);
+	const [shelterData, setShelterData] = useState<Shelter>();
+
+	const getShelterData = () => {
+		fetch(`http://192.168.1.5:3000/shelter/${dog.shelterId}`, {
+			method: 'GET',
+			headers: {
+				Accept: 'application/json',
+			},
+		})
+			.then((response) => response.json())
+			.then((json) => setShelterData(json))
+			.catch((error) => console.error(error))
+			.finally(() => setLoading(false));
+	};
+
+	const share = async () => {
+		const text = `${dog.name} is een ${dog.breed}`;
+		const result = await Share.share({
+			message: text,
+			title: '',
+		});
+	};
+
+	useEffect(() => {
+		setLoading(true);
+		getShelterData();
+		console.log(shelterData);
+	}, []);
 
 	return (
 		<ScrollView style={styles.container}>
@@ -27,10 +58,10 @@ export default ({ route }: { route: any }) => {
 					</LinearGradient>
 				</ImageBackground>
 				<View style={styles.actionsContainer}>
-					<View style={styles.actionGroup}>
+					<Pressable onPress={share} style={styles.actionGroup}>
 						<Ionicons name="share-social" size={30} />
 						<Text>Share</Text>
-					</View>
+					</Pressable>
 					<View style={styles.actionGroup}>
 						<Ionicons name="today" size={30} />
 						<Text>Schedule visit</Text>
@@ -51,24 +82,40 @@ export default ({ route }: { route: any }) => {
 			<View>
 				<View style={styles.interTitleContainer}>
 					<Text style={styles.interTitle}>SHELTER</Text>
-					<Pressable>
+					<Pressable onPress={() => navigation.navigate('ShelterDetail', { payload: shelterData })}>
 						<Text>View More</Text>
 					</Pressable>
 				</View>
-				<ImageBackground style={{ width: '100%', height: 300 }} source={{ uri: dog.imgUrl }} />
+				<ImageBackground style={{ width: '100%', height: 300 }} source={{ uri: shelterData?.imgUrl }} />
 				<View style={styles.infoBar}>
 					<View style={styles.interTitleContainer}>
 						<View style={styles.infoIconContainer}>
 							<ImageBackground style={styles.infoIcon} source={{ uri: 'https://img.freepik.com/free-vector/location_53876-59942.jpg?t=st=1651494407~exp=1651495007~hmac=2ebd1261ccad668f343bb244ccf2f0efedd0ec7df5c11396a6c832394b12cbe5&w=900' }} />
 						</View>
 						<View>
-							<Text>{'shelter name'}</Text>
-							<Text>{'location'}</Text>
+							<Text>{shelterData?.name}</Text>
+							<Text>{shelterData?.location}</Text>
 						</View>
 						<Ionicons name="arrow-forward-circle" size={30} />
 					</View>
+					<View style={styles.interTitleContainer}>
+						<View style={styles.infoIconContainer}>
+							<ImageBackground style={styles.infoIcon} source={{ uri: 'https://img.freepik.com/free-vector/location_53876-59942.jpg?t=st=1651494407~exp=1651495007~hmac=2ebd1261ccad668f343bb244ccf2f0efedd0ec7df5c11396a6c832394b12cbe5&w=900' }} />
+						</View>
+						<View>
+							<Text>{shelterData?.phoneNumber}</Text>
+						</View>
+					</View>
+					<View style={styles.interTitleContainer}>
+						<View style={styles.infoIconContainer}>
+							<ImageBackground style={styles.infoIcon} source={{ uri: 'https://img.freepik.com/free-vector/location_53876-59942.jpg?t=st=1651494407~exp=1651495007~hmac=2ebd1261ccad668f343bb244ccf2f0efedd0ec7df5c11396a6c832394b12cbe5&w=900' }} />
+						</View>
+						<View>
+							<Text>{shelterData?.site}</Text>
+						</View>
+					</View>
 				</View>
-				<Text style={styles.textBlock}>{'Was certainty remaining engrossed applauded sir how discovery. Settled opinion how enjoyed greater joy adapted too shy. Now properly surprise expenses interest nor replying she she. Bore tall nay many many time yet less. Doubtful for answered one fat indulged margaret sir shutters together. Ladies so in wholly around whence in at. Warmth he up giving oppose if.'}</Text>
+				<Text style={styles.textBlock}>{shelterData?.description}</Text>
 			</View>
 		</ScrollView>
 	);

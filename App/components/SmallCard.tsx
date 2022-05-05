@@ -5,7 +5,7 @@ import Shelter from '../interfaces/Shelter';
 
 export default ({ shelter, navigation }: { shelter: Shelter; navigation: any }) => {
 	return (
-		<TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Detail', { payload: shelter })}>
+		<TouchableOpacity style={styles.container} onPress={() => navigation.navigate('ShelterDetail', { payload: shelter })}>
 			<ImageBackground source={{ uri: shelter.imgUrl }} resizeMode="cover" style={styles.image}>
 				<LinearGradient colors={['transparent', '#000000CC']} locations={[0, 0.8]} style={styles.linearGradient}>
 					<Text style={styles.name}>{shelter.name}</Text>
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'flex-end',
 	},
-
 	name: {
 		color: 'white',
 		fontSize: 16,

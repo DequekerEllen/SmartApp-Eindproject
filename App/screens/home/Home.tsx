@@ -1,6 +1,6 @@
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import { View, FlatList, StyleSheet, Text, StatusBar, ScrollView } from 'react-native';
+import { View, FlatList, StyleSheet, Text, StatusBar, ScrollView, RefreshControl } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Card from '../../components/Card';
 import SearchBar from '../../components/SearchBar';
@@ -19,6 +19,7 @@ export default ({ navigation }: { navigation: any }) => {
 	const [isLoading, setLoading] = useState(false);
 	const [dogData, setDogData] = useState([]);
 	const [shelterData, setShelterData] = useState([]);
+	const [refreshing, setRefreshing] = useState(false);
 
 	const getDogData = () => {
 		fetch('http://192.168.1.5:3000/dogs', {
@@ -46,25 +47,46 @@ export default ({ navigation }: { navigation: any }) => {
 	};
 
 	useEffect(() => {
-		setLoading(true);
+		// setLoading(true);
 		getDogData();
 		getShelterData();
 	}, []);
 
 	const Dogs: Dog[] = dogData;
+
 	const Shelters: Shelter[] = shelterData;
+
+	const onRefresh = () => {
+		console.log('refreshing');
+		getDogData();
+	};
 
 	const renderDog = ({ item }: { item: Dog }) => <Card dog={item} key={item.dogId} navigation={navigation} />;
 	const renderShelter = ({ item }: { item: Shelter }) => <SmallCard shelter={item} key={item.shelterId} navigation={navigation} />;
+
 	return (
 		<SafeAreaView>
-			<SearchBar />
+			{/* <SearchBar /> */}
 			<ScrollView>
-				<ScrollView horizontal={true}>
-					<FlatList horizontal nestedScrollEnabled data={Shelters} renderItem={renderShelter} />
+				<Text style={styles.interTitle}>Shelters</Text>
+				<ScrollView horizontal={true} style={styles.smallCardsContainer}>
+					<FlatList horizontal data={Shelters} renderItem={renderShelter} keyExtractor={(item) => item.shelterId} />
 				</ScrollView>
-				<FlatList nestedScrollEnabled data={Dogs} renderItem={renderDog} keyExtractor={(item) => item.dogId} />
+				<Text style={styles.interTitle}>Available Dogs</Text>
+				<FlatList refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} data={Dogs} renderItem={renderDog} keyExtractor={(item) => item.dogId} />
 			</ScrollView>
 		</SafeAreaView>
 	);
 };
+
+const styles = StyleSheet.create({
+	interTitle: {
+		color: '#8a8a8a',
+		fontSize: 12,
+		paddingLeft: 20,
+		lineHeight: 16,
+	},
+	smallCardsContainer: {
+		marginBottom: 20,
+	},
+});

@@ -1,18 +1,14 @@
-import { ImageBackground, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, ImageBackground, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Dog from '../interfaces/Dog';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { GestureResponderEvent } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useCallback, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import LottieView from 'lottie-react-native';
 import { useState } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
 
 export default ({ dog, navigation }: { dog: Dog; navigation: any }) => {
-	const [isFavorite, setIsFavorite] = useState<boolean>(dog.isFavorite);
-	const animation = useRef(null);
-	const firstRun = useRef(true);
-
 	const updateDog = () => {
-		setIsFavorite(dog.isFavorite);
 		fetch('http://192.168.1.5:3000/dog', {
 			method: 'PUT',
 			headers: {
@@ -32,37 +28,17 @@ export default ({ dog, navigation }: { dog: Dog; navigation: any }) => {
 			}),
 		});
 	};
+	const [isFavorite, setIsFavorite] = useState<boolean>(dog.isFavorite);
 
-	useFocusEffect(
-		useCallback(() => {
-			const fetchDog = () => {
-				try {
-					fetch(`http://192.168.1.5:3000/dog/${dog.dogId}`, {
-						method: 'GET',
-						headers: {
-							Accept: 'application/json',
-						},
-					})
-						.then((response) => response.json())
-						.then((json) => {
-							console.log('--------------------------');
-							dog = json;
-							setIsFavorite(dog.isFavorite);
-							console.log(dog.name, dog.isFavorite);
-						});
-				} catch (e) {
-					console.log(e);
-				}
-			};
-
-			fetchDog();
-		}, [dog.dogId])
-	);
+	const animation = useRef(null);
+	const firstRun = useRef(true);
 
 	const pressHeart = () => {
-		let dogFavorite = dog;
-		dogFavorite.isFavorite == true ? (dogFavorite.isFavorite = false) : (dogFavorite.isFavorite = true);
+		dog.isFavorite == true ? (dog.isFavorite = false) : (dog.isFavorite = true);
 		updateDog();
+		console.log(dog.isFavorite);
+		setIsFavorite(dog.isFavorite);
+		console.log(isFavorite);
 	};
 
 	useEffect(() => {
@@ -74,13 +50,13 @@ export default ({ dog, navigation }: { dog: Dog; navigation: any }) => {
 				//@ts-ignore
 				animation.current.play(0, 0);
 			}
-			firstRun.current = false;
 		} else if (isFavorite) {
 			//@ts-ignore
 			animation.current.play(0, 75);
 		} else {
 			//@ts-ignore
 			animation.current.play(75, 0);
+			firstRun.current = true;
 		}
 	}, [isFavorite]);
 
@@ -88,7 +64,7 @@ export default ({ dog, navigation }: { dog: Dog; navigation: any }) => {
 		<TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Detail', { payload: dog })}>
 			<ImageBackground source={{ uri: dog.imgUrl }} resizeMode="cover" style={styles.image}>
 				<View style={styles.heartContainer}>
-					<Pressable onPressIn={pressHeart}>
+					<Pressable onPress={pressHeart}>
 						<LottieView ref={animation} style={{ width: 75, height: 75 }} source={require('../heart.json')} autoPlay={false} loop={false} />
 						{/* <Ionicons style={styles.heart} color={'red'} name={dog.isFavorite == true ? 'heart' : 'heart-outline'} size={32} /> */}
 					</Pressable>

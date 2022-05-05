@@ -4,6 +4,7 @@ import Detail from './Detail';
 import 'react-native-gesture-handler';
 import Home from './Home';
 import { ParamListBase, RouteProp } from '@react-navigation/native';
+import ShelterDetail from './ShelterDetail';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,14 @@ export default function HomeIndex() {
 				component={Detail}
 				options={() => ({
 					title: 'Detail',
+					headerShown: true,
+				})}
+			/>
+			<Stack.Screen
+				name="ShelterDetail"
+				component={ShelterDetail}
+				options={() => ({
+					title: 'ShelterDetail',
 					headerShown: true,
 				})}
 			/>

@@ -10,6 +10,14 @@ const Stack = createStackNavigator();
 
 const screenOptions = ({ route }: { route: RouteProp<ParamListBase> }): StackNavigationOptions => ({
 	headerShown: false,
+	headerStyle: {
+		backgroundColor: '#F8ECD1',
+	},
+	headerTitleStyle: {
+		fontSize: 16,
+		color: '#AC7D88',
+	},
+	headerTintColor: '#AC7D88',
 });
 
 export default function HomeIndex() {

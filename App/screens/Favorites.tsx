@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react';
 import { FlatList, ScrollView, SectionList, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Card from '../components/Card';
-import CardFavorites from '../components/CardFavorites';
-import EmptyFavorites from '../components/EmptyFavorites';
+import EmptyComponent from '../components/EmptyComponent';
 import Dog from '../interfaces/Dog';
 
 export default ({ navigation }: { navigation: any }) => {
@@ -44,10 +43,10 @@ export default ({ navigation }: { navigation: any }) => {
 
 	const renderDog = ({ item }: { item: Dog }) => <Card dog={item} key={item.dogId} navigation={navigation} />;
 	const _listEmptyComponent = () => {
-		return <EmptyFavorites />;
+		return <EmptyComponent text={'No favorites yet'} />;
 	};
 	return (
-		<SafeAreaView>
+		<SafeAreaView style={{ backgroundColor: '#FEFBE7', minHeight: '100%' }}>
 			<ScrollView>
 				<FlatList ListEmptyComponent={_listEmptyComponent} data={testUsers} renderItem={renderDog} keyExtractor={(item) => item.dogId} />
 			</ScrollView>

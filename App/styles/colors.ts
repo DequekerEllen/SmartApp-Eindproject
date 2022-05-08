@@ -1,7 +1,7 @@
 export const colors = {
-    alpha: '#ba0f0f',
-    dark: '#2e0101',
-    light: '#f2eeeb',
-    grey: '#808080',
-  }
-  
+	alpha: '#1a1a1a',
+	dark: '#AC7D88',
+	light: '#F8ECD1',
+	background: '#FEFBE7',
+	grey: '#808080',
+};

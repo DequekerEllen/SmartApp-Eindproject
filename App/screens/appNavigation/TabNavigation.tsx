@@ -3,10 +3,8 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { ParamListBase, RouteProp } from '@react-navigation/native';
 import React, { ComponentProps } from 'react';
 import Favorites from '../Favorites';
-import Nearby from '../Nearby';
-import Home from '../home/Home';
-import Detail from '../home/Detail';
 import HomeIndex from '../home';
+import Locations from '../Locations';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,12 +14,29 @@ const screenOptions = ({ route }: { route: RouteProp<ParamListBase> }): BottomTa
 
 		if (route.name === 'Explore') icon = 'home';
 		if (route.name === 'Favorites') icon = 'heart';
-		if (route.name === 'Nearby') icon = 'md-compass';
+		if (route.name === 'Locations') icon = 'md-compass';
 
+		if (focused) {
+			color = '#AC7D88';
+		}
+		if (!focused) {
+			color = '#DEB6AB';
+		}
 		return <Ionicons color={color} name={icon} size={size} />;
 	},
+
 	tabBarLabel: () => {
 		return null;
+	},
+	tabBarStyle: {
+		backgroundColor: '#F8ECD1',
+	},
+	headerStyle: {
+		backgroundColor: '#F8ECD1',
+	},
+	headerTitleStyle: {
+		fontSize: 16,
+		color: '#AC7D88',
 	},
 });
 
@@ -34,10 +49,9 @@ export default () => {
 				options={({ navigation }) => ({
 					headerShown: false,
 				})}
-				
 			/>
 			<Tab.Screen name="Favorites" component={Favorites} />
-			<Tab.Screen name="Nearby" component={Nearby} />
+			<Tab.Screen name="Locations" component={Locations} />
 		</Tab.Navigator>
 	);
 };

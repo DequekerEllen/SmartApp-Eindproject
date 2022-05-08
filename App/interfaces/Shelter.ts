@@ -14,6 +14,8 @@ export default interface Shelter {
 	dogs: Dog[];
 	imgUrl: string;
 	location: string;
+	longitude: number;
+	latitude: number;
 	name: string;
 	phoneNumber: string;
 	shelterId: string;

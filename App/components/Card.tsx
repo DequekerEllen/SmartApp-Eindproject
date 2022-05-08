@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import LottieView from 'lottie-react-native';
 import { useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
+import card from '../styles/card';
 
 export default ({ dog, navigation }: { dog: Dog; navigation: any }) => {
 	const [isFavorite, setIsFavorite] = useState<boolean>(dog.isFavorite);
@@ -45,16 +46,15 @@ export default ({ dog, navigation }: { dog: Dog; navigation: any }) => {
 					})
 						.then((response) => response.json())
 						.then((json) => {
-							console.log('--------------------------');
+							// console.log('--------------------------');
 							dog = json;
 							setIsFavorite(dog.isFavorite);
-							console.log(dog.name, dog.isFavorite);
+							// console.log(dog.name, dog.isFavorite);
 						});
 				} catch (e) {
 					console.log(e);
 				}
 			};
-
 			fetchDog();
 		}, [dog.dogId])
 	);
@@ -85,59 +85,19 @@ export default ({ dog, navigation }: { dog: Dog; navigation: any }) => {
 	}, [isFavorite]);
 
 	return (
-		<TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Detail', { payload: dog })}>
-			<ImageBackground source={{ uri: dog.imgUrl }} resizeMode="cover" style={styles.image}>
-				<View style={styles.heartContainer}>
+		<TouchableOpacity style={card.container} onPress={() => navigation.navigate('Detail', { payload: dog })}>
+			<ImageBackground source={{ uri: dog.imgUrl }} resizeMode="cover" style={card.image}>
+				<View style={card.heartContainer}>
 					<Pressable onPressIn={pressHeart}>
-						<LottieView ref={animation} style={{ width: 75, height: 75 }} source={require('../heart.json')} autoPlay={false} loop={false} />
+						<LottieView ref={animation} style={card.heart} source={require('../heart.json')} autoPlay={false} loop={false} />
 						{/* <Ionicons style={styles.heart} color={'red'} name={dog.isFavorite == true ? 'heart' : 'heart-outline'} size={32} /> */}
 					</Pressable>
 				</View>
-				<LinearGradient colors={['transparent', '#000000CC']} locations={[0, 0.8]} style={styles.linearGradient}>
-					<Text style={styles.name}>{dog.name}</Text>
-					<Text style={styles.info}>{dog.breed}</Text>
+				<LinearGradient colors={['transparent', '#000000CC']} locations={[0, 0.8]} style={card.linearGradient}>
+					<Text style={card.name}>{dog.name}</Text>
+					<Text style={card.info}>{dog.breed}</Text>
 				</LinearGradient>
 			</ImageBackground>
 		</TouchableOpacity>
 	);
 };
-
-const styles = StyleSheet.create({
-	container: {
-		width: '95%',
-		height: 200,
-		borderRadius: 20,
-		overflow: 'hidden',
-		margin: 10,
-	},
-	image: {
-		flex: 1,
-		justifyContent: 'flex-end',
-	},
-	imageText: {
-		textAlign: 'left',
-	},
-	name: {
-		color: 'white',
-		fontSize: 16,
-		lineHeight: 16,
-	},
-	info: {
-		color: 'white',
-		fontSize: 11,
-	},
-	linearGradient: {
-		justifyContent: 'flex-end',
-		height: 100,
-		paddingLeft: 20,
-		paddingBottom: 15,
-	},
-	heartContainer: {
-		flex: 1,
-		alignItems: 'flex-end',
-	},
-	heart: {
-		paddingRight: 10,
-		paddingTop: 10,
-	},
-});

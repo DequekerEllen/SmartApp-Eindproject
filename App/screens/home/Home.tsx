@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { View, FlatList, StyleSheet, Text, StatusBar, ScrollView, RefreshControl } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Card from '../../components/Card';
-import SearchBar from '../../components/SearchBar';
 import SmallCard from '../../components/SmallCard';
 import Dog from '../../interfaces/Dog';
 import Shelter from '../../interfaces/Shelter';
@@ -65,7 +64,7 @@ export default ({ navigation }: { navigation: any }) => {
 	const renderShelter = ({ item }: { item: Shelter }) => <SmallCard shelter={item} key={item.shelterId} navigation={navigation} />;
 
 	return (
-		<SafeAreaView>
+		<SafeAreaView style={{ backgroundColor: '#FEFBE7' }}>
 			{/* <SearchBar /> */}
 			<ScrollView>
 				<Text style={styles.interTitle}>Shelters</Text>
@@ -81,7 +80,8 @@ export default ({ navigation }: { navigation: any }) => {
 
 const styles = StyleSheet.create({
 	interTitle: {
-		color: '#8a8a8a',
+		color: '#AC7D88',
+		opacity: 0.7,
 		fontSize: 12,
 		paddingLeft: 20,
 		lineHeight: 16,

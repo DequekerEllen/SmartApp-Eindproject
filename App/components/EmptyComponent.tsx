@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-export default () => {
+export default ({ text }: { text: string }) => {
 	return (
 		<View style={styles.container}>
-			<Text style={styles.interTitle}>No Favorites yet</Text>
+			<Text style={styles.interTitle}>{text}</Text>
 		</View>
 	);
 };

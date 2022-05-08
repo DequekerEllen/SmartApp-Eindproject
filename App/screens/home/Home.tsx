@@ -6,6 +6,8 @@ import Card from '../../components/Card';
 import SmallCard from '../../components/SmallCard';
 import Dog from '../../interfaces/Dog';
 import Shelter from '../../interfaces/Shelter';
+import card from '../../styles/card';
+import generic from '../../styles/generic';
 
 export default ({ navigation }: { navigation: any }) => {
 	const nav = useNavigation();
@@ -67,26 +69,13 @@ export default ({ navigation }: { navigation: any }) => {
 		<SafeAreaView style={{ backgroundColor: '#FEFBE7' }}>
 			{/* <SearchBar /> */}
 			<ScrollView>
-				<Text style={styles.interTitle}>Shelters</Text>
-				<ScrollView horizontal={true} style={styles.smallCardsContainer}>
+				<Text style={generic.interTitle}>Shelters</Text>
+				<ScrollView horizontal={true} style={card.smallCardsContainer}>
 					<FlatList horizontal data={Shelters} renderItem={renderShelter} keyExtractor={(item) => item.shelterId} />
 				</ScrollView>
-				<Text style={styles.interTitle}>Available Dogs</Text>
+				<Text style={generic.interTitle}>Available Dogs</Text>
 				<FlatList refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} data={Dogs} renderItem={renderDog} keyExtractor={(item) => item.dogId} />
 			</ScrollView>
 		</SafeAreaView>
 	);
 };
-
-const styles = StyleSheet.create({
-	interTitle: {
-		color: '#AC7D88',
-		opacity: 0.7,
-		fontSize: 12,
-		paddingLeft: 20,
-		lineHeight: 16,
-	},
-	smallCardsContainer: {
-		marginBottom: 20,
-	},
-});

@@ -1,5 +1,6 @@
 import Shelter from '../interfaces/Shelter';
-import {  StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import generic from '../styles/generic';
 
 export default ({ shelter }: { shelter: Shelter }) => {
 	const shelterLocation = {
@@ -10,7 +11,7 @@ export default ({ shelter }: { shelter: Shelter }) => {
 	};
 	return (
 		<View style={{ marginTop: 20 }}>
-			<Text style={styles.interTitle}>Visiting Hours</Text>
+			<Text style={generic.interTitle}>Visiting Hours</Text>
 			<View style={{ marginHorizontal: 20, marginTop: 10, marginBottom: 30 }}>
 				<View style={{ display: 'flex', flexDirection: 'row' }}>
 					<Text style={{ width: 150, fontSize: 16 }}>Monday</Text>
@@ -44,12 +45,3 @@ export default ({ shelter }: { shelter: Shelter }) => {
 		</View>
 	);
 };
-
-const styles = StyleSheet.create({
-	interTitle: {
-		color: '#AC7D88',
-		fontSize: 12,
-		paddingLeft: 20,
-		lineHeight: 16,
-	},
-});

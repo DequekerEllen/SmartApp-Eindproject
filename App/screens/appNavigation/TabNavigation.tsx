@@ -5,6 +5,7 @@ import React, { ComponentProps } from 'react';
 import Favorites from '../Favorites';
 import HomeIndex from '../home';
 import Locations from '../Locations';
+import { colors } from '../../styles/colors';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,10 +18,10 @@ const screenOptions = ({ route }: { route: RouteProp<ParamListBase> }): BottomTa
 		if (route.name === 'Locations') icon = 'md-compass';
 
 		if (focused) {
-			color = '#AC7D88';
+			color = colors.dark;
 		}
 		if (!focused) {
-			color = '#DEB6AB';
+			color = colors.pink;
 		}
 		return <Ionicons color={color} name={icon} size={size} />;
 	},
@@ -29,14 +30,14 @@ const screenOptions = ({ route }: { route: RouteProp<ParamListBase> }): BottomTa
 		return null;
 	},
 	tabBarStyle: {
-		backgroundColor: '#F8ECD1',
+		backgroundColor: colors.light,
 	},
 	headerStyle: {
-		backgroundColor: '#F8ECD1',
+		backgroundColor: colors.light,
 	},
 	headerTitleStyle: {
 		fontSize: 16,
-		color: '#AC7D88',
+		color: colors.dark,
 	},
 });
 
@@ -46,7 +47,7 @@ export default () => {
 			<Tab.Screen
 				name="Explore"
 				component={HomeIndex}
-				options={({ navigation }) => ({
+				options={() => ({
 					headerShown: false,
 				})}
 			/>

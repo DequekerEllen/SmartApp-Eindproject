@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import MapView, { Callout, Marker } from 'react-native-maps';
 import { colors } from '../styles/colors';
+import generic from '../styles/generic';
 import { pinColors } from '../styles/pinColors';
 
 export default ({ navigation }: { navigation: any }) => {
@@ -21,9 +22,9 @@ export default ({ navigation }: { navigation: any }) => {
 	}, []);
 
 	return (
-		<View style={styles.container}>
+		<View style={generic.mapContainer}>
 			<MapView
-				style={styles.map}
+				style={generic.map}
 				initialRegion={{
 					latitude: 50.8517181,
 					longitude: 3.3425546,
@@ -44,7 +45,7 @@ export default ({ navigation }: { navigation: any }) => {
 							description={marker.location}
 						>
 							<Callout tooltip onPress={() => navigation.navigate('ShelterDetail', { payload: marker })}>
-								<Pressable style={styles.tooltip}>
+								<Pressable style={generic.tooltip}>
 									<View>
 										<Text style={{ color: colors.alpha }}>{marker.name}</Text>
 										<Text style={{ fontSize: 12, color: colors.dark }}>{marker.location}</Text>
@@ -57,20 +58,3 @@ export default ({ navigation }: { navigation: any }) => {
 		</View>
 	);
 };
-
-const styles = StyleSheet.create({
-	container: {
-		...StyleSheet.absoluteFillObject,
-		flex: 1, //the container will fill the whole screen.
-		justifyContent: 'flex-end',
-		alignItems: 'center',
-	},
-	map: {
-		...StyleSheet.absoluteFillObject,
-	},
-	tooltip: {
-		backgroundColor: colors.background,
-		padding: 10,
-		borderRadius: 10,
-	},
-});

@@ -1,5 +1,5 @@
 import Shelter from '../interfaces/Shelter';
-import { FlatList, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import VisitingHours from './VisitingHours';
 import ShelterContact from './ShelterContact';
@@ -20,7 +20,7 @@ export default ({ value, shelter, navigation }: { value: string; shelter: Shelte
 			<View>
 				<ShelterContact shelter={shelter} />
 				<MapView
-					style={styles.map}
+					style={{ height: 200 }}
 					initialRegion={{
 						latitude: 51.0017181,
 						longitude: 3.9425546,
@@ -83,9 +83,3 @@ export default ({ value, shelter, navigation }: { value: string; shelter: Shelte
 		);
 	}
 };
-
-const styles = StyleSheet.create({
-	map: {
-		height: 200,
-	},
-});

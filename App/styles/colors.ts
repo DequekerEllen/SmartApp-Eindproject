@@ -3,5 +3,6 @@ export const colors = {
 	dark: '#AC7D88',
 	light: '#F8ECD1',
 	background: '#FEFBE7',
+	pink: '#DEB6AB',
 	grey: '#808080',
 };

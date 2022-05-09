@@ -35,8 +35,8 @@ export default ({ value, shelter, navigation }: { value: string; shelter: Shelte
 		);
 	} else if (value == 'story') {
 		return (
-			<View style={{ marginHorizontal: 20 }}>
-				<Text>{shelter.description}</Text>
+			<View style={{ marginHorizontal: 20, marginBottom: 20 }}>
+				<Text style={{ lineHeight: 20 }}>{shelter.description}</Text>
 			</View>
 		);
 	} else if (value == 'pets') {
